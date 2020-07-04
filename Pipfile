@@ -9,10 +9,9 @@ flake8 = "*"
 [packages]
 django = "*"
 djangorestframework = "*"
-django-allauth = "*"
-django-rest-auth = "*"
-django-rest-knox = "*"
 pillow = "*"
+psycopg2 = "*"
+django-softdelete = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.7"
