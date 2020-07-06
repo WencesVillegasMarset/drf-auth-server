@@ -125,3 +125,5 @@ dmypy.json
 .vscode/
 db.sqlite3
 settings_dev.py
+
+entrypoint.sh

@@ -20,4 +20,4 @@ RUN pip install pipenv && pipenv install --system
 
 COPY . /code/
 
-ENTRYPOINT ["./entrypoint.sh"]
+# ENTRYPOINT ["./entrypoint.sh"]
