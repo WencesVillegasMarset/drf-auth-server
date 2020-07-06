@@ -1,4 +1,4 @@
-FROM python:3.8.2
+FROM python:3.7
 
 # Set environment variables
 
@@ -19,3 +19,5 @@ RUN pip install pipenv && pipenv install --system
 # Copy project
 
 COPY . /code/
+
+ENTRYPOINT ["./entrypoint.sh"]
