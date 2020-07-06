@@ -34,12 +34,11 @@ class User(AbstractBaseUser, SoftDeleteObject, PermissionsMixin):
         return self.email
 
     class Meta:
+        # Example Permissions
         permissions = [
-            ("can_create_admin_users", "Can create users with group Admin"),
-            ("can_list_all_users", "Can list all users"),
+            ("createadmin_user", "Can create users with group Admin"),
+            ("list_user", "Can list all users"),
         ]
-
-
 
 
 """

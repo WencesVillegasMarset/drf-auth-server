@@ -126,4 +126,4 @@ dmypy.json
 db.sqlite3
 settings_dev.py
 
-entrypoint.sh
+/entrypoint.sh

@@ -1,6 +1,7 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
 from users.models import User
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, Permission
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -34,9 +35,3 @@ class RegistrationSerializer(serializers.ModelSerializer):
         return user
 
 
-class GroupSerializer(serializers.ModelSerializer):
-    permissions = serializers.StringRelatedField(many=True)
-
-    class Meta:
-        model = Group
-        fields = ['id', 'name', 'permissions']
