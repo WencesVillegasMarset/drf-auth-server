@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from users.models import User
+from django.contrib.auth.models import Group
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -12,7 +13,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['email', 'password', 'password2']
+        fields = ['email', 'password', 'password2', 'groups']
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -31,3 +32,11 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+
+class GroupSerializer(serializers.ModelSerializer):
+    permissions = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = Group
+        fields = ['id', 'name', 'permissions']

@@ -1,17 +1,20 @@
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import (
+    AbstractBaseUser, PermissionsMixin, Group)
 from django.utils import timezone
 from django.db import models
 from .managers import UserManager
-# from django.conf import settings
-# from django.db.models.signals import post_save
-# from django.dispatch import receiver
-# from rest_framework.authtoken.models import Token
+from softdelete.models import SoftDeleteObject
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, SoftDeleteObject, PermissionsMixin):
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=150, null=True)
     phone = models.CharField(max_length=50, null=True)
+    groups = models.ForeignKey(
+        to=Group,
+        on_delete=models.CASCADE,
+        null=True
+        )
     date_of_birth = models.DateField(blank=True, null=True)
     picture = models.ImageField(blank=True, null=True)
     is_staff = models.BooleanField(default=False)
@@ -22,13 +25,21 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['groups']
 
     def get_full_name(self):
         return self.email
 
     def get_short_name(self):
         return self.email
+
+    class Meta:
+        permissions = [
+            ("can_create_admin_users", "Can create users with group Admin"),
+            ("can_list_all_users", "Can list all users"),
+        ]
+
+
 
 
 """
