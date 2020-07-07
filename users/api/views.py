@@ -27,11 +27,5 @@ def logout(request):
     request.user.auth_token.delete()
     return Response(status=status.HTTP_200_OK)
 
-
-# @permission_classes([RoleBasedPermission])
-# class GroupViewSet(viewsets.ModelViewSet):
-#     """
-#     A viewset for viewing and editing user instances.
-#     """
-#     serializer_class = GroupSerializer
-#     queryset = Group.objects.all()
+# TODO: Consultar los grupos disponibles
+# TODO: Registro de campo Groups como String y no PK

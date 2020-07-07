@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'softdelete',
+    'django_rest_passwordreset',
     # Custom
     'users',
 
@@ -146,7 +147,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'users.User'
-
 
 if os.getenv('DJANGO_DEVELOPMENT') is not None:
     from settings_dev import *  # or specific overrides
