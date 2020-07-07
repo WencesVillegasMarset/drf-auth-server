@@ -30,7 +30,7 @@ class User(AbstractBaseUser, SoftDeleteObject, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['groups']
+    REQUIRED_FIELDS = []
 
     def get_full_name(self):
         return self.email
