@@ -1,8 +1,6 @@
 from rest_framework import serializers
-from rest_framework.validators import UniqueTogetherValidator
 from users.models import User
-from django.contrib.auth.models import Group, Permission
-from django.core.exceptions import ObjectDoesNotExist;
+from django.contrib.auth.models import Group
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -30,15 +28,17 @@ class RegistrationSerializer(serializers.ModelSerializer):
         if password != password2:
             raise serializers.ValidationError(
                 {'password': 'Passwords do not match!'})
-        
+
         user.set_password(password)
         user.save()
         return user
+
 
 class ListUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email', 'groups']
+
 
 class GroupSerializer(serializers.ModelSerializer):
 
