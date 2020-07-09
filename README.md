@@ -8,3 +8,4 @@
 * Email and Password credentials
 * Registration, Login and Logout
 * Customizable User model
+* Password Reset via django-rest-passwordreset
