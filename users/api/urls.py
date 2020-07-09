@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework.authtoken.views import obtain_auth_token
 from users.api.views import (
-    register, logout, group_get, group_list)
+    register, logout, group_get, group_list, list_user)
 # from rest_framework.routers import DefaultRouter
 
 
@@ -13,4 +13,5 @@ urlpatterns = [
         'django_rest_passwordreset.urls', namespace='password_reset')),
     path('groups/<int:pk>/', group_get, name='view_group'),
     path('groups/list/', group_list, name='list_group'),
+    path('list/', list_user, name="user_list"),
 ]
