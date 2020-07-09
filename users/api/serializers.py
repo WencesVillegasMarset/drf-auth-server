@@ -8,7 +8,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
         style={
             'input_type': 'password',
         },
-        write_only=True)
+        write_only=True, required=True)
+    groups = serializers.PrimaryKeyRelatedField(
+        many=False, required=True, queryset=Group.objects.all())
 
     class Meta:
         model = User

@@ -24,17 +24,18 @@ class AuthenticationTests(APITestCase):
             'username': 'juan@juan.com',
             'password': 'juan123'
         }
-        response = self.client.post('/api/users/login', data=user)
+        response = self.client.post('/api/users/login/', data=user)
         self.assertEqual(self.token.key, response.data['token'])
 
     def test_register_while_logged_in_and_valid_data(self):
         new_user = {
             'email': "pedro@pedro.com",
             'password': "pedrito123",
-            'password2': "pedrito123"
+            'password2': "pedrito123",
+            "groups": 1
         }
         response = self.client.post(
-            '/api/users/register',
+            '/api/users/register/',
             data=new_user, format='json',
             HTTP_AUTHORIZATION="Token "+self.token.key)
         self.assertEqual(response.status_code, 201)
@@ -43,23 +44,24 @@ class AuthenticationTests(APITestCase):
         new_user = {
             'email': "pedro@pedro.com",
             'password': "pedrito123",
-            'password2': "a"
+            'password2': "a",
+            "groups": 1
         }
         response = self.client.post(
-            '/api/users/register',
+            '/api/users/register/',
             data=new_user, format='json',
             HTTP_AUTHORIZATION="Token "+self.token.key)
         self.assertEqual(response.status_code, 400)
 
     def test_logout_successful(self):
         response = self.client.get(
-            '/api/users/logout', HTTP_AUTHORIZATION="Token " + self.token.key)
+            '/api/users/logout/', HTTP_AUTHORIZATION="Token " + self.token.key)
 
         self.assertEqual(response.status_code, 200)
 
     def test_logout_unauthorized(self):
         response = self.client.get(
-            '/api/users/logout', HTTP_AUTHORIZATION="not_a_token")
+            '/api/users/logout/', HTTP_AUTHORIZATION="not_a_token")
         self.assertEqual(response.status_code, 401)
 
 
@@ -79,10 +81,11 @@ class PermissionsTests(APITestCase):
         new_user = {
             'email': "pedro@pedro.com",
             'password': "pedrito123",
-            'password2': "pedrito123"
+            'password2': "pedrito123",
+            "groups": 1
         }
         response = self.client.post(
-            '/api/users/register',
+            '/api/users/register/',
             data=new_user, format='json',
             HTTP_AUTHORIZATION="Token " + token.key)
         self.assertEqual(response.status_code, 403)
@@ -94,10 +97,11 @@ class PermissionsTests(APITestCase):
         new_user = {
             'email': "pedro@pedro.com",
             'password': "pedrito123",
-            'password2': "pedrito123"
+            'password2': "pedrito123",
+            "groups": 1
         }
         response = self.client.post(
-            '/api/users/register',
+            '/api/users/register/',
             data=new_user, format='json',
             HTTP_AUTHORIZATION="Token " + token.key)
         self.assertEqual(response.status_code, 201)
