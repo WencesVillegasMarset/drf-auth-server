@@ -33,3 +33,12 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+
+class GroupSerializer(serializers.ModelSerializer):
+
+    permissions = serializers.StringRelatedField(many=True, read_only=True)
+
+    class Meta:
+        model = Group
+        fields = ['id', 'name', 'permissions']
