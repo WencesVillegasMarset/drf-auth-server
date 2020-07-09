@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-# from rest_framework.decorators import action
+from rest_framework.decorators import api_view, action
 from rest_framework import status
 from users.api.serializers import RegistrationSerializer, GroupSerializer, ListUserSerializer
 from rest_framework import viewsets
@@ -14,8 +14,6 @@ from users.models import User
 def logout(request):
     request.user.auth_token.delete()
     return Response(status=status.HTTP_200_OK)
-
-#TODO agregar soporte para instituciones
 
 class UsersViewSet(viewsets.ViewSet):
 
@@ -36,9 +34,13 @@ class UsersViewSet(viewsets.ViewSet):
             return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
         return Response(data=data, status=status.HTTP_201_CREATED)
 
+    #TODO agregar verificación de institución
     def list(self, request):
+        '''
+        Listar usuarios
+        '''
         serializer = ListUserSerializer(User.objects.all(), many=True)
-        return Response(data=serializer, status=status.HTTP_200_OK)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
     
 
 
