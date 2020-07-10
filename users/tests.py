@@ -33,7 +33,7 @@ class AuthenticationTests(APITestCase):
             'email': "pedro@pedro.com",
             'password': "pedrito123",
             'password2': "pedrito123",
-            "groups": 1
+            "groups": self.group.id
         }
         response = self.client.post(
             '/api/users/register/',
@@ -46,7 +46,7 @@ class AuthenticationTests(APITestCase):
             'email': "pedro@pedro.com",
             'password': "pedrito123",
             'password2': "a",
-            "groups": 1
+            "groups": self.group.id
         }
         response = self.client.post(
             '/api/users/register/',
@@ -84,7 +84,7 @@ class PermissionsTests(APITestCase):
             'email': "pedro@pedro.com",
             'password': "pedrito123",
             'password2': "pedrito123",
-            "groups": 1
+            "groups": self.group_docente.id
         }
         response = self.client.post(
             '/api/users/register/',
@@ -100,7 +100,7 @@ class PermissionsTests(APITestCase):
             'email': "pedro@pedro.com",
             'password': "pedrito123",
             'password2': "pedrito123",
-            "groups": 1
+            "groups": self.group_docente.id
         }
         response = self.client.post(
             '/api/users/register/',
