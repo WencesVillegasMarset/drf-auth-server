@@ -14,6 +14,7 @@ class AuthenticationTests(APITestCase):
         '''
         self.client = APIClient()
         self.group = Group.objects.create(name="Docente")
+        self.group.save()
         self.group.permissions.add(Permission.objects.get(name="Can add user"))
         self.user = User.objects.create_user(
             'juan@juan.com', password='juan123', groups=self.group)
@@ -70,6 +71,7 @@ class PermissionsTests(APITestCase):
     def setUp(self):
         self.client = APIClient()
         self.group_docente = Group.objects.create(name="Docente")
+        self.group_docente.save()
         self.group_docente.permissions.add(
             Permission.objects.get(name="Can add user"))
         self.group_otro = Group.objects.create(name="Otro")
